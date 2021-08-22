@@ -4,6 +4,7 @@ import Main from './Main'
 import getWeb3 from './web3/getWeb3'
 import { ConnectWallet } from './component/ConnectWallet'
 import connectMetamaskWallet from './web3/connectMetamaskWallet'
+import disconnectMetamaskWallet from './web3/disconnectMetamaskWallet'
 
 class App extends Component {
   constructor(props) {
@@ -63,7 +64,12 @@ class App extends Component {
   }
 
   _connect = async() => {
-    const userAddr = await connectMetamaskWallet()
+    let userAddr
+    if (this.state.selectedAddress === undefined) {
+      userAddr = await connectMetamaskWallet()
+    } else {
+      userAddr = await disconnectMetamaskWallet()
+    }
     console.log(userAddr)
     this.setState({selectedAddress: userAddr})
     this.connectWallet.current.changeAddress(this.state.selectedAddress)
