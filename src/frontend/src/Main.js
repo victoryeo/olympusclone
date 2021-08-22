@@ -6,9 +6,18 @@ class Main extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            
+            olympusBalance: 0,
+            busdBalance: 0,
+            selectedAddress: null
         }
     }
+
+    changeAddress = (address) => {
+        this.setState({
+          selectedAddress: address
+        })
+    }
+
     render() {
         return (
             <div class="row">
@@ -16,8 +25,8 @@ class Main extends Component {
                     <div class="card-header">
                         <img src={logocircle} height='64' alt="Logo" class="card-header_img"/>
                         <div  class="card-header_center">
-                            <div  class="info"> 
-                            Please connect wallet to view
+                            <div  class="info">
+                            {this.state.selectedAddress ? this.state.olympusBalance : "Please connect wallet to view"}
                             </div>
                         </div>
                         <h3 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h3>
@@ -33,7 +42,7 @@ class Main extends Component {
                         <img src={busd} height='64' alt="Logo" class="card-header_img"/>
                         <div class="card-header_center">
                             <div class="info"> 
-                              Please connect wallet to view 
+                            {this.state.selectedAddress ? `$${this.state.busdBalance}` : "Please connect wallet to view"} 
                             </div>
                             
                         </div>

@@ -21,6 +21,7 @@ class App extends Component {
     }
     this.web3 = null
     this.connectWallet = React.createRef();
+    this.main = React.createRef();
   }
 
   async componentDidMount() {
@@ -73,6 +74,7 @@ class App extends Component {
     console.log(userAddr)
     this.setState({selectedAddress: userAddr})
     this.connectWallet.current.changeAddress(this.state.selectedAddress)
+    this.main.current.changeAddress(this.state.selectedAddress)
   }
 
   render(){
@@ -82,6 +84,7 @@ class App extends Component {
       content = <p id="loader" className="text-center">Loading...</p>
     } else {
       content = <Main
+        ref={this.main}
         totalBalance={this.state.totalBalance}
         calcTotal={this.calcTotal}
       />
