@@ -19,6 +19,7 @@ class App extends Component {
       selectedAddress: undefined,
     }
     this.web3 = null
+    this.connectWallet = React.createRef();
   }
 
   async componentDidMount() {
@@ -65,6 +66,7 @@ class App extends Component {
     const userAddr = await connectMetamaskWallet()
     console.log(userAddr)
     this.setState({selectedAddress: userAddr})
+    this.connectWallet.current.changeAddress(this.state.selectedAddress)
   }
 
   render(){
@@ -81,6 +83,7 @@ class App extends Component {
     return (
       <div className="App">
         <ConnectWallet 
+          ref={this.connectWallet}
           connectWallet={() => this._connect()}
           totalBalance={this.state.totalBalance}
         />

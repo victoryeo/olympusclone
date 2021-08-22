@@ -9,6 +9,15 @@ import logocircle from '../images/logo.circle.png'
 export class ConnectWallet extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      selectedAddress: null
+    }
+  }
+
+  changeAddress = (address) => {
+    this.setState({
+      selectedAddress: address
+    })
   }
 
   render() {
@@ -39,7 +48,7 @@ export class ConnectWallet extends React.Component {
               type="button"
               onClick={this.props.connectWallet}
             >
-              Connect
+              {this.state.selectedAddress ? this.state.selectedAddress : "Connect"}
             </button>
           </div>
         </div>
