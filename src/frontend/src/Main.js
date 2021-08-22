@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logocircle from './images/logo.circle.png'
-import degree45 from './images/degree45.png'
+import busd from './images/busd.png'
 
 class Main extends Component {
     constructor(props) {
@@ -30,7 +30,7 @@ class Main extends Component {
                 
                 <div class="col-md-3">
                     <div class="card-header">
-                        <img src={degree45} height='64' alt="Logo" class="card-header_img"/>
+                        <img src={busd} height='64' alt="Logo" class="card-header_img"/>
                         <div class="card-header_center">
                             <div class="info"> 
                               Please connect wallet to view 
