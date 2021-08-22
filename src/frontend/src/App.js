@@ -6,6 +6,22 @@ import { ConnectWallet } from './component/ConnectWallet'
 import connectMetamaskWallet from './web3/connectMetamaskWallet'
 import disconnectMetamaskWallet from './web3/disconnectMetamaskWallet'
 
+const endpoint = "https://graphql.bitquery.io";
+const TEST_QUERY = `
+  {
+    bitcoin {
+      transactions(options: {asc: "date.date"}) {
+        date: date {
+          date(format: "%Y")
+        }
+        count: count
+        feeValue
+        avgFee: feeValue(calculate: average)
+      }
+    }
+  }
+`;
+
 class App extends Component {
   constructor(props) {
     console.log('constructor')
@@ -48,6 +64,30 @@ class App extends Component {
         ethBalance: ethBal.toString()
       })
     }
+
+    const testdata = fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query: TEST_QUERY })
+      })
+      .then((response) => {
+        if (response.status >= 400) {
+          throw new Error("Error fetching data");
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        console.log(data)
+        return (data.data)
+      })
+      .catch (err => {
+        console.error('Error ',err.message)
+      })
+
+    testdata.then(function(result) {
+      console.log(result) 
+   })
   }
 
   calcTotal = async (etherAmount, etherWeight, daiAmount, daiWeight,
