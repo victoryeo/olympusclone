@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logocircle from './images/logo.circle.png'
 import busd from './images/busd.png'
+import busdreward from './images/busdreward.png'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const CONTRACT_ADDR = process.env.REACT_APP_CONTRACT_ADDR
@@ -11,6 +12,7 @@ class Main extends Component {
         this.state = {
             olympusBalance: 0,
             busdBalance: 0,
+            busdReward: 0,
             selectedAddress: null
         }
     }
@@ -56,7 +58,7 @@ class Main extends Component {
                             {this.state.selectedAddress ? this.state.olympusBalance : "Please connect wallet to view"}
                             </div>
                         </div>
-                        <h3 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h3>
+                        <h4 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h4>
                     </div>
                     <div class="btn-main">
                         <span class="mas">BUY OLYMPUS</span>
@@ -73,8 +75,21 @@ class Main extends Component {
                             </div>
                             
                         </div>
-                        <h3 class="card-header_btm">TOTAL BUSD PAID</h3>
+                        <h4 class="card-header_btm">TOTAL BUSD PAID</h4>
             
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-header">
+                    <img src={busdreward} height='64' alt="Logo" class="card-header_img"/>
+                        <div class="card-header_center">
+                            <div class="info"> 
+                            {this.state.selectedAddress ? `$${this.state.busdReward}` : "Please connect wallet to view"} 
+                            </div>
+                            
+                        </div>
+                        <h4 class="card-header_btm">PENDING BUSD REWARDS</h4>
                     </div>
                 </div>
             </div>
