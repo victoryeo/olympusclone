@@ -67,81 +67,81 @@ class Main extends Component {
     render() {
         return (
             <div>
-                <section class="section-container">
-                <div class="row">
-                    <div class="col-md-3">
-                        <div class="card-header">
-                            <img src={logocircle} height='64' alt="Logo" class="card-header_img"/>
-                            <div  class="card-header_center">
-                                <div  class="info">
+                <section className="section-container">
+                <div className="row">
+                    <div className="col-md-3">
+                        <div className="card-header">
+                            <img src={logocircle} height='64' alt="Logo" className="card-header_img"/>
+                            <div  className="card-header_center">
+                                <div  className="info">
                                 {this.state.selectedAddress ? this.state.olympusBalance : "Please connect wallet to view"}
                                 </div>
                             </div>
-                            <h4 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h4>
+                            <h4 className="card-header_btm">TOTAL OLYMPUS HOLDINGS</h4>
                         </div>
-                        <div class="btn-main">
-                            <span class="mas">BUY OLYMPUS</span>
-                            <button type="button" name="Hover" class="">BUY OLYMPUS</button>
+                        <div className="btn-main">
+                            <span className="mas">BUY OLYMPUS</span>
+                            <button type="button" name="Hover" className="">BUY OLYMPUS</button>
                         </div>
                     </div>
                     
-                    <div class="col-md-3">
-                        <div class="card-header">
-                            <img src={busd} height='64' alt="Logo" class="card-header_img"/>
-                            <div class="card-header_center">
-                                <div class="info"> 
+                    <div className="col-md-3">
+                        <div className="card-header">
+                            <img src={busd} height='64' alt="Logo" className="card-header_img"/>
+                            <div className="card-header_center">
+                                <div className="info"> 
                                 {this.state.selectedAddress ? `$${this.state.busdBalance}` : "Please connect wallet to view"} 
                                 </div>
                                 
                             </div>
-                            <h4 class="card-header_btm">TOTAL BUSD PAID</h4>
+                            <h4 className="card-header_btm">TOTAL BUSD PAID</h4>
                 
                         </div>
                     </div>
 
-                    <div class="col-md-3">
-                        <div class="card-header">
-                        <img src={busdreward} height='64' alt="Logo" class="card-header_img"/>
-                            <div class="card-header_center">
-                                <div class="info"> 
+                    <div className="col-md-3">
+                        <div className="card-header">
+                        <img src={busdreward} height='64' alt="Logo" className="card-header_img"/>
+                            <div className="card-header_center">
+                                <div className="info"> 
                                 {this.state.selectedAddress ? `$${this.state.busdReward}` : "Please connect wallet to view"} 
                                 </div>
                                 
                             </div>
-                            <h4 class="card-header_btm">PENDING BUSD REWARDS</h4>
+                            <h4 className="card-header_btm">PENDING BUSD REWARDS</h4>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
-                        <div class="card-header">
-                        <img src={selltax} height='64' alt="Logo" class="card-header_img"/>
-                            <div class="card-header_center">
-                                <div class="info"> 
+                    <div className="col-md-3">
+                        <div className="card-header">
+                        <img src={selltax} height='64' alt="Logo" className="card-header_img"/>
+                            <div className="card-header_center">
+                                <div className="info"> 
                                 5.00%
                                 </div>
                                 
                             </div>
-                            <h4 class="card-header_btm">CURRENT SELL TAX</h4>
+                            <h4 className="card-header_btm">CURRENT SELL TAX</h4>
                         </div>
                     </div>
                 </div>
                 </section>
                 <p></p>
                 <div>
-                    <section class="section-container">
-                        <div class="holdersBx"> 
+                    <section className="section-container">
+                        <div className="holdersBx"> 
                             TOTAL PAID TO HOLDERS 
                             <div className="gradient-text-outer">
-                                <h2 class="gradient-text">$ 1077003</h2> BUSD 
+                                <h2 className="gradient-text">$ 1077003</h2> BUSD 
                             </div>
                         </div>
                     </section>
                     <p></p>
-                    <section class="section-container">
-                        <div class="holdersBx"> 
+                    <section className="section-container">
+                        <div className="holdersBx"> 
                             ZEUS BUYBACK BALANCE 
                             <div className="gradient-text-outer">
-                                <h2 class="gradient-text">${this.state.buybackBalance}</h2> BUSD 
+                                <h2 className="gradient-text">${this.state.buybackBalance}</h2> BUSD 
                             </div>
                         </div>
                     </section>
