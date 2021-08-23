@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import logocircle from './images/logo.circle.png'
 import busd from './images/busd.png'
 import busdreward from './images/busdreward.png'
+import selltax from './images/selltax.png'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const CONTRACT_ADDR = process.env.REACT_APP_CONTRACT_ADDR
@@ -90,6 +91,19 @@ class Main extends Component {
                             
                         </div>
                         <h4 class="card-header_btm">PENDING BUSD REWARDS</h4>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="card-header">
+                    <img src={selltax} height='64' alt="Logo" class="card-header_img"/>
+                        <div class="card-header_center">
+                            <div class="info"> 
+                            5.00%
+                            </div>
+                            
+                        </div>
+                        <h4 class="card-header_btm">CURRENT SELL TAX</h4>
                     </div>
                 </div>
             </div>
