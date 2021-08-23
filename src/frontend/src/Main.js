@@ -3,6 +3,7 @@ import logocircle from './images/logo.circle.png'
 import busd from './images/busd.png'
 import busdreward from './images/busdreward.png'
 import selltax from './images/selltax.png'
+import CoinGecko from 'coingecko-api'
 
 const API_KEY = process.env.REACT_APP_API_KEY
 const CONTRACT_ADDR = process.env.REACT_APP_CONTRACT_ADDR
@@ -15,12 +16,20 @@ class Main extends Component {
             busdBalance: 0,
             busdReward: 0,
             buybackBalance: 0,
+            tokenLastPrice: 0,
             selectedAddress: null
         }
     }
 
     async componentDidMount() {
         console.log('componentDidMount')
+
+        const CoinGeckoClient = new CoinGecko();
+        let data = await CoinGeckoClient.coins.fetchTickers('bnbpay');
+        console.log(data.data.tickers[0].last)
+        this.setState({
+            tokenLastPrice: data.data.tickers[0].last
+        })
     }
 
     changeAddress = async(address) => {
@@ -142,6 +151,15 @@ class Main extends Component {
                             ZEUS BUYBACK BALANCE 
                             <div className="gradient-text-outer">
                                 <h2 className="gradient-text">${this.state.buybackBalance}</h2> BUSD 
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section className="section-container">
+                        <div className="holdersBx"> 
+                            Token price 
+                            <div className="gradient-text-outer">
+                                <h2 className="gradient-text">${this.state.tokenLastPrice}</h2> USD
                             </div>
                         </div>
                     </section>
