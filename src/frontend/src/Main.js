@@ -14,6 +14,7 @@ class Main extends Component {
             olympusBalance: 0,
             busdBalance: 0,
             busdReward: 0,
+            buybackBalance: 0,
             selectedAddress: null
         }
     }
@@ -29,10 +30,11 @@ class Main extends Component {
         console.log(`${API_KEY}`)
         console.log(`${CONTRACT_ADDR}`)
         console.log(`${this.state.selectedAddress}`)
-        const BSC_URL = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${CONTRACT_ADDR}&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
-        console.log(BSC_URL)
+        const BSC_URL1 = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${CONTRACT_ADDR}&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
+        console.log(BSC_URL1)
+        const BSC_URL2 = `https://api.bscscan.com/api?module=account&action=balance&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
         if (this.state.selectedAddress != undefined) {
-            const resp = await fetch(BSC_URL, {
+            const resp = await fetch(BSC_URL1, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" }
             })
@@ -43,6 +45,20 @@ class Main extends Component {
                 console.log('OK')
                 this.setState({
                     olympusBalance: data.result
+                })                
+            }
+
+            const resp2 = await fetch(BSC_URL2, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            })
+            console.log(resp2)
+            const data2 = await resp2.json()
+            console.log(data2)
+            if (data2.message === "OK") {
+                console.log('OK')
+                this.setState({
+                    buybackBalance: data2.result
                 })                
             }
         }
@@ -110,13 +126,22 @@ class Main extends Component {
                     </div>
                 </div>
                 </section>
-
+                <p></p>
                 <div>
                     <section class="section-container">
                         <div class="holdersBx"> 
                             TOTAL PAID TO HOLDERS 
                             <div className="gradient-text-outer">
                                 <h2 class="gradient-text">$ 1077003</h2> BUSD 
+                            </div>
+                        </div>
+                    </section>
+                    <p></p>
+                    <section class="section-container">
+                        <div class="holdersBx"> 
+                            ZEUS BUYBACK BALANCE 
+                            <div className="gradient-text-outer">
+                                <h2 class="gradient-text">${this.state.buybackBalance}</h2> BUSD 
                             </div>
                         </div>
                     </section>
