@@ -130,6 +130,34 @@
   max-width: 25%;
 }
 
+.section-container {
+  max-width: 1600px;
+  margin: auto;
+      margin-top: auto;
+      margin-bottom: auto;
+}
+
+.holdersBx {
+  display: flex;
+  align-items: center;
+  font-size: 22px;
+  background: #c81a2e;
+  padding: 20px 40px;
+  vertical-align: middle;
+  justify-content: center;
+  border-radius: 16px;
+}
+
+.gradient-text {
+  font-size: 40px;
+  margin: 0 30px;
+}
+
+.gradient-text-outer {
+  display: flex;
+  align-items: flex-end;
+}
+
 #topcontainer {
   height: 100%;
   width: 100%;
