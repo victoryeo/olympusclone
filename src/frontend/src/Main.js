@@ -50,61 +50,76 @@ class Main extends Component {
 
     render() {
         return (
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="card-header">
-                        <img src={logocircle} height='64' alt="Logo" class="card-header_img"/>
-                        <div  class="card-header_center">
-                            <div  class="info">
-                            {this.state.selectedAddress ? this.state.olympusBalance : "Please connect wallet to view"}
+            <div>
+                <section class="section-container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card-header">
+                            <img src={logocircle} height='64' alt="Logo" class="card-header_img"/>
+                            <div  class="card-header_center">
+                                <div  class="info">
+                                {this.state.selectedAddress ? this.state.olympusBalance : "Please connect wallet to view"}
+                                </div>
                             </div>
+                            <h4 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h4>
                         </div>
-                        <h4 class="card-header_btm">TOTAL OLYMPUS HOLDINGS</h4>
+                        <div class="btn-main">
+                            <span class="mas">BUY OLYMPUS</span>
+                            <button type="button" name="Hover" class="">BUY OLYMPUS</button>
+                        </div>
                     </div>
-                    <div class="btn-main">
-                        <span class="mas">BUY OLYMPUS</span>
-                        <button type="button" name="Hover" class="">BUY OLYMPUS</button>
-                    </div>
-                </div>
+                    
+                    <div class="col-md-3">
+                        <div class="card-header">
+                            <img src={busd} height='64' alt="Logo" class="card-header_img"/>
+                            <div class="card-header_center">
+                                <div class="info"> 
+                                {this.state.selectedAddress ? `$${this.state.busdBalance}` : "Please connect wallet to view"} 
+                                </div>
+                                
+                            </div>
+                            <h4 class="card-header_btm">TOTAL BUSD PAID</h4>
                 
-                <div class="col-md-3">
-                    <div class="card-header">
-                        <img src={busd} height='64' alt="Logo" class="card-header_img"/>
-                        <div class="card-header_center">
-                            <div class="info"> 
-                            {this.state.selectedAddress ? `$${this.state.busdBalance}` : "Please connect wallet to view"} 
-                            </div>
-                            
                         </div>
-                        <h4 class="card-header_btm">TOTAL BUSD PAID</h4>
-            
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-header">
+                        <img src={busdreward} height='64' alt="Logo" class="card-header_img"/>
+                            <div class="card-header_center">
+                                <div class="info"> 
+                                {this.state.selectedAddress ? `$${this.state.busdReward}` : "Please connect wallet to view"} 
+                                </div>
+                                
+                            </div>
+                            <h4 class="card-header_btm">PENDING BUSD REWARDS</h4>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card-header">
+                        <img src={selltax} height='64' alt="Logo" class="card-header_img"/>
+                            <div class="card-header_center">
+                                <div class="info"> 
+                                5.00%
+                                </div>
+                                
+                            </div>
+                            <h4 class="card-header_btm">CURRENT SELL TAX</h4>
+                        </div>
                     </div>
                 </div>
+                </section>
 
-                <div class="col-md-3">
-                    <div class="card-header">
-                    <img src={busdreward} height='64' alt="Logo" class="card-header_img"/>
-                        <div class="card-header_center">
-                            <div class="info"> 
-                            {this.state.selectedAddress ? `$${this.state.busdReward}` : "Please connect wallet to view"} 
+                <div>
+                    <section class="section-container">
+                        <div class="holdersBx"> 
+                            TOTAL PAID TO HOLDERS 
+                            <div className="gradient-text-outer">
+                                <h2 class="gradient-text">$ 1077003</h2> BUSD 
                             </div>
-                            
                         </div>
-                        <h4 class="card-header_btm">PENDING BUSD REWARDS</h4>
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="card-header">
-                    <img src={selltax} height='64' alt="Logo" class="card-header_img"/>
-                        <div class="card-header_center">
-                            <div class="info"> 
-                            5.00%
-                            </div>
-                            
-                        </div>
-                        <h4 class="card-header_btm">CURRENT SELL TAX</h4>
-                    </div>
+                    </section>
                 </div>
             </div>
         )
