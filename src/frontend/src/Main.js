@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import logocircle from './images/logo.circle.png'
 import busd from './images/busd.png'
 
+const API_KEY = process.env.REACT_APP_API_KEY
+const CONTRACT_ADDR = process.env.REACT_APP_CONTRACT_ADDR
+
 class Main extends Component {
     constructor(props) {
         super(props)
@@ -12,10 +15,34 @@ class Main extends Component {
         }
     }
 
-    changeAddress = (address) => {
+    async componentDidMount() {
+        console.log('componentDidMount')
+    }
+
+    changeAddress = async(address) => {
         this.setState({
           selectedAddress: address
         })
+        console.log(`${API_KEY}`)
+        console.log(`${CONTRACT_ADDR}`)
+        console.log(`${this.state.selectedAddress}`)
+        const BSC_URL = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${CONTRACT_ADDR}&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
+        console.log(BSC_URL)
+        if (this.state.selectedAddress != undefined) {
+            const resp = await fetch(BSC_URL, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" }
+            })
+            console.log(resp)
+            const data = await resp.json()
+            console.log(data)
+            if (data.message === "OK") {
+                console.log('OK')
+                this.setState({
+                    olympusBalance: data.result
+                })                
+            }
+        }
     }
 
     render() {
