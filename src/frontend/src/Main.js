@@ -35,6 +35,12 @@ class Main extends Component {
         })
     }
 
+    onBuyOlympusClick = async() => {
+        console.log("onBuyOlympusClick")
+        let newPageUrl = "https://pancakeswap.finance/swap#/swap?outputCurrency=0x18b426813731C144108c6D7FAf5EdE71a258fD9A&inputCurrency=BNB"
+        window.open(newPageUrl, "_blank") //to open new page
+    }
+
     changeAddress = async(address) => {
         this.setState({
           selectedAddress: address
@@ -141,7 +147,10 @@ class Main extends Component {
                         </div>
                         <div className="btn-main">
                             <span className="mas">BUY OLYMPUS</span>
-                            <button type="button" name="Hover" className="">BUY OLYMPUS</button>
+                            <button type="button" name="Hover" className=""
+                             onClick={this.onBuyOlympusClick}>
+                                BUY OLYMPUS
+                            </button>
                         </div>
                     </div>
                     
