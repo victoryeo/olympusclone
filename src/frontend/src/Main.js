@@ -28,7 +28,7 @@ class Main extends Component {
         console.log('componentDidMount')
 
         const CoinGeckoClient = new CoinGecko();
-        let data = await CoinGeckoClient.coins.fetchTickers('bitcoin');
+        let data = await CoinGeckoClient.coins.fetchTickers('olympus');
         console.log(data.data.tickers[0].last)
         this.setState({
             tokenLastPrice: data.data.tickers[0].last
@@ -99,6 +99,27 @@ class Main extends Component {
                 this.setState({
                     buybackBalance: data2.result
                 })                
+            }
+
+            // total tokens purchased or received by user
+            const resp3 = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query: RECEIVED_TOKEN_QUERY })
+            })
+
+            const data3 = await resp3.json()
+            console.log(data3.data)
+            console.log(data3.data.ethereum.dexTrades.length)
+            if (data3.data.ethereum.dexTrades.length == 0) {
+                this.setState({totalBpayReceived: 0})
+            } else if (data3.data.ethereum.dexTrades.length > 0) {
+                let receivedAmt = 0;
+                for(const trade of data3.data.ethereum.dexTrades) {
+                    console.log(trade)
+                    receivedAmt += trade.baseAmount
+                }
+                this.setState({totalBpayReceived: receivedAmt})
             }
         }
     }
