@@ -79,53 +79,65 @@ class Main extends Component {
         `;
 
         if (this.state.selectedAddress != undefined) {
-            const resp = await fetch(BSC_URL1, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            })
-            console.log(resp)
-            const data = await resp.json()
-            console.log(data)
-            if (data.message === "OK") {
-                console.log('OK')
-                this.setState({
-                    olympusBalance: data.result
-                })                
-            }
-
-            const resp2 = await fetch(BSC_URL2, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" }
-            })
-            console.log(resp2)
-            const data2 = await resp2.json()
-            console.log(data2)
-            if (data2.message === "OK") {
-                console.log('OK')
-                this.setState({
-                    buybackBalance: data2.result
-                })                
-            }
-
-            // total tokens purchased or received by user
-            const resp3 = await fetch(endpoint, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ query: RECEIVED_TOKEN_QUERY })
-            })
-
-            const data3 = await resp3.json()
-            console.log(data3.data)
-            console.log(data3.data.ethereum.dexTrades.length)
-            if (data3.data.ethereum.dexTrades.length == 0) {
-                this.setState({totalBpayReceived: 0})
-            } else if (data3.data.ethereum.dexTrades.length > 0) {
-                let receivedAmt = 0;
-                for(const trade of data3.data.ethereum.dexTrades) {
-                    console.log(trade)
-                    receivedAmt += trade.baseAmount
+            try {
+                const resp = await fetch(BSC_URL1, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" }
+                })
+                console.log(resp)
+                const data = await resp.json()
+                console.log(data)
+                if (data.message === "OK") {
+                    console.log('OK')
+                    this.setState({
+                        olympusBalance: data.result
+                    })                
                 }
-                this.setState({totalBpayReceived: receivedAmt})
+            } catch (e) {
+                console.log(`Fetch BSC_URL1: ${e}`)
+            }
+
+            try {
+                const resp2 = await fetch(BSC_URL2, {
+                    method: "GET",
+                    headers: { "Content-Type": "application/json" }
+                })
+                console.log(resp2)
+                const data2 = await resp2.json()
+                console.log(data2)
+                if (data2.message === "OK") {
+                    console.log('OK')
+                    this.setState({
+                        buybackBalance: data2.result
+                    })                
+                }
+            } catch (e) {
+                console.log(`Fetch BSC_URL2: ${e}`)
+            }
+
+            try {
+                // total tokens purchased or received by user
+                const resp3 = await fetch(endpoint, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ query: RECEIVED_TOKEN_QUERY })
+                })
+
+                const data3 = await resp3.json()
+                console.log(data3.data)
+                console.log(data3.data.ethereum.dexTrades.length)
+                if (data3.data.ethereum.dexTrades.length == 0) {
+                    this.setState({totalBpayReceived: 0})
+                } else if (data3.data.ethereum.dexTrades.length > 0) {
+                    let receivedAmt = 0;
+                    for(const trade of data3.data.ethereum.dexTrades) {
+                        console.log(trade)
+                        receivedAmt += trade.baseAmount
+                    }
+                    this.setState({totalBpayReceived: receivedAmt})
+                }
+            } catch (e) {
+                console.log(`Fetch RECEIVED_TOKEN_QUERY: ${e}`)
             }
         }
     }
