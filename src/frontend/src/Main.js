@@ -8,6 +8,8 @@ import CoinGecko from 'coingecko-api'
 const API_KEY = process.env.REACT_APP_API_KEY
 const CONTRACT_ADDR = process.env.REACT_APP_CONTRACT_ADDR
 
+const endpoint = "https://graphql.bitquery.io";
+
 class Main extends Component {
     constructor(props) {
         super(props)
@@ -17,7 +19,8 @@ class Main extends Component {
             busdReward: 0,
             buybackBalance: 0,
             tokenLastPrice: 0,
-            selectedAddress: null
+            selectedAddress: null,
+            totalOlympusReceived: 0,
         }
     }
 
@@ -25,7 +28,7 @@ class Main extends Component {
         console.log('componentDidMount')
 
         const CoinGeckoClient = new CoinGecko();
-        let data = await CoinGeckoClient.coins.fetchTickers('bnbpay');
+        let data = await CoinGeckoClient.coins.fetchTickers('bitcoin');
         console.log(data.data.tickers[0].last)
         this.setState({
             tokenLastPrice: data.data.tickers[0].last
@@ -40,8 +43,35 @@ class Main extends Component {
         console.log(`${CONTRACT_ADDR}`)
         console.log(`${this.state.selectedAddress}`)
         const BSC_URL1 = `https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=${CONTRACT_ADDR}&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
-        console.log(BSC_URL1)
+        
         const BSC_URL2 = `https://api.bscscan.com/api?module=account&action=balance&address=${this.state.selectedAddress}&tag=latest&apikey=${API_KEY}`
+
+        const RECEIVED_TOKEN_QUERY = `
+        {
+            ethereum(network: bsc) {
+                dexTrades(
+                    date: {since: "2021-07-06", till: "2021-08-22"},
+                    baseCurrency: {is: "${CONTRACT_ADDR}"},
+                    any: [{txTo: {is: "${this.state.selectedAddress}"}}]
+                ) {
+                baseCurrency {
+                    symbol
+                    address
+                }
+                baseAmount
+                quoteCurrency {
+                    symbol
+                    address
+                }
+                quoteAmount
+                trades: count
+                quotePrice
+                side
+                }
+            }
+        }
+        `;
+
         if (this.state.selectedAddress != undefined) {
             const resp = await fetch(BSC_URL1, {
                 method: "GET",
