@@ -8,16 +8,17 @@ const getWeb3 = new Promise(resolve => {
     let results
     // Metamask no longer injects web3
     //console.log("web3 " + window.web3)
-    if (!window.ethereum) {
-        console.log(window.ethereum)
-        // new way of accessing Metamask
-        window.web3 = new Web3(window.ethereum)
-        // deprecated
-        //window.ethereum.enable()
+    if (window.ethereum) {
+      console.log(window.ethereum)
+      // new way of accessing Metamask
+      window.web3 = new Web3(window.ethereum)
+      // deprecated
+      //window.ethereum.enable()
     }
     else {
-        // Fallback to localhost if no web3 injection
-        window.web3 = new Web3(new Web3.providers.HttpProvider(ganachehost))
+      console.log("ganache")
+      // Fallback to localhost if no web3 injection
+      window.web3 = new Web3(new Web3.providers.HttpProvider(ganachehost))
     }
     let { web3 } = window
     results = web3
